@@ -28,58 +28,100 @@
 }
 
 -(IBAction)alertBtnTapped:(id)sender{
-    //アラートを表示
-    UIAlertController *alertController =
-    [UIAlertController alertControllerWithTitle:@"アラートです！"
-                                        message:@"iOS8対応です"
-                                 preferredStyle:UIAlertControllerStyleAlert];
     
-    //addActionした順に左から右にボタンが配置されます
-    [alertController addAction:
-     [UIAlertAction actionWithTitle:@"はい"
-                              style:UIAlertActionStyleDefault
-                            handler:^(UIAlertAction *action){
-        //otherボタンが押された時の処理
-        [self otherButtonPushed];
-    }]];
+    //iOS8以上で、UIAlertControllerクラスが利用できる場合
+    if ([UIAlertController class]) {
+        //アラートを表示
+        UIAlertController *alertController =
+        [UIAlertController alertControllerWithTitle:@"アラートです！"
+                                            message:@"iOS8対応です"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        //addActionした順に左から右にボタンが配置されます
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:@"はい"
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *action){
+                                    //otherボタンが押された時の処理
+                                    [self otherButtonPushed];
+                                }]];
+        
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:@"いいえ"
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *action){
+                                    //cancelボタンが押された時の処理
+                                    [self cancelButtonPushed];
+                                }]];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        
+        //iOS8未満で、UIAlertControllerクラスが利用できない場合
+        UIAlertView *alertView =
+        [[UIAlertView alloc] initWithTitle:@"アラートです！"
+                                   message:@"iOS7にも対応してます"
+                                  delegate:nil
+                         cancelButtonTitle:@"はい"
+                         otherButtonTitles:@"いいえ", nil];
+        [alertView show];
     
-    [alertController addAction:
-     [UIAlertAction actionWithTitle:@"いいえ"
-                              style:UIAlertActionStyleDefault
-                            handler:^(UIAlertAction *action){
-        //cancelボタンが押された時の処理
-        [self cancelButtonPushed];
-    }]];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    }
 
 }
 
 -(IBAction)actionSheetBtnPushed:(id)sender{
-    //アクションシートを表示
-    UIAlertController *alertController =
-    [UIAlertController alertControllerWithTitle:@"ActionSheetです！"
-                                        message:@"iOS8対応です"
-                                 preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [alertController addAction:
-     [UIAlertAction actionWithTitle:@"はい"
-                              style:UIAlertActionStyleDefault
-                            handler:^(UIAlertAction *action){
-        //otherボタンが押された時の処理
-        [self otherButtonPushed];
-    }]];
-    
-    [alertController addAction:
-     [UIAlertAction actionWithTitle:@"いいえ"
-                              style:UIAlertActionStyleDefault
-                            handler:^(UIAlertAction *action){
-        //cancelボタンが押された時の処理
-        [self cancelButtonPushed];
-    }]];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    //iOS8以上で、UIAlertControllerクラスが利用できる場合
+    if ([UIAlertController class]) {
+        //アクションシートを表示
+        UIAlertController *alertController =
+        [UIAlertController alertControllerWithTitle:@"ActionSheetです！"
+                                            message:@"iOS8対応です"
+                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:@"はい"
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *action){
+                                    //otherボタンが押された時の処理
+                                    [self otherButtonPushed];
+                                }]];
+        
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:@"いいえ"
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *action){
+                                    //cancelボタンが押された時の処理
+                                    [self cancelButtonPushed];
+                                }]];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        
+        //iOS8未満で、UIAlertControllerクラスが利用できない場合
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"ActionSheetです！"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"いいえ"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"はい", nil];
+        [actionSheet showInView:self.view];
+    }
 }
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            //otherボタンが押された時の処理
+            [self otherButtonPushed];
+            break;
+        case 1:
+            //cancelボタンが押された時の処理
+            [self cancelButtonPushed];
+            break;
+    }
+}
+
 
 -(IBAction)imgPickerBtnPushed:(id)sender{
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
