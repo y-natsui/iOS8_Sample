@@ -6,5 +6,9 @@ iOS7からiOS8へのアップデートに伴い、UIAlertController ＆  UIImage
 
 
 ##How to use
+Setting Alert Button ＆ ActionSheet Button ＆ ImagePicker Button on the view. When pushed these buttons, display the results.
+About ImagePicker when picking a photo, display it on the UIImageView.
+
+
 View上にAlert Button、ActionSheet Button、ImagePicker Buttonを設置しており、各ボタンを押すことでアクションの結果が反映されます。
 ImagePickerに関しては選択された画像を元に上部に設置されたUIIamageViewに反映される様になっています。
