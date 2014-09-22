@@ -1,8 +1,8 @@
 #iOS8_Sample
 
-Changing from iOS7 to iOS8. Using UIAlertController ＆ UIImagePickerController without UIAlertView ＆ UIActionSheet.  
+Updating from iOS7 to iOS8. Using UIAlertController ＆ UIImagePickerController without UIAlertView ＆ UIActionSheet.  
 
-iOS7からiOS8へのアップデートに伴い、UIAlertController ＆ UIImagePickerController周りの扱いが変更若干変更された様なので、そちらの方をを反映したサンプルアプリです。
+iOS7からiOS8へのアップデートに伴い、UIAlertController ＆  UIImagePickerController周りの扱いが変更若干変更された様なので、そちらの方をを反映したサンプルアプリです。
 
 
 ##How to use
